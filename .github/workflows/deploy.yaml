@@ -16,10 +16,10 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'corretto'
+          distribution: 'temurin'
           java-version: '17'
-          check-latest: true
           cache: 'maven'
+          # check-latest: true
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
