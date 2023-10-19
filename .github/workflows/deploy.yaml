@@ -21,5 +21,23 @@ jobs:
           cache: maven
           check-latest: true
 
-      - name: Build with Maven
+      - name: Clean Install with Maven
         run: mvn clean install
+
+      - name: Package with Maven
+        run: mvn clean package -Dmaven.test.skip
+
+      - name: Login to Portainer
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} ${{ secrets.DOCKER_REGISTRY }}
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+  
+      - name: Deploy Portainer Stack
+        run: |
+          curl -X POST -H "Authorization: Bearer ${{ secrets.PORTAINER_API_TOKEN }}" -H "Content-Type: application/json" -d "@/path/to/docker-compose.yml" http://${{ secrets.PORTAINER_URL }}/api/stacks?type=1
+        env:
+          PORTAINER_API_TOKEN: ${{ secrets.PORTAINER_API_TOKEN }}
+          PORTAINER_URL: ${{ secrets.PORTAINER_URL }}
