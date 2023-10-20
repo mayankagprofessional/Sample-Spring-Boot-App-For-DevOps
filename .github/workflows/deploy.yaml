@@ -45,4 +45,4 @@ jobs:
   
       - name: Deploy Portainer Stack
         run: |
-          curl -X POST -H "X-API-Key: ${{ secrets.PORTAINER_API_TOKEN }}" "Content-Type: application/json" -d "Name=Spring" -d "@/docker-compose.yml" https://${{ secrets.PORTAINER_URL }}:9443/api/stacks -k
+          curl -X POST -H "X-API-Key: ${{ secrets.PORTAINER_API_TOKEN }}" "Content-Type: application/json" -d "Name=Spring" -d "@docker-compose.yml" https://${{ secrets.PORTAINER_URL }}:9443/api/stacks -k
