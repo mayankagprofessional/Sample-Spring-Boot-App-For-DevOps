@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: mayankag96/springboot-docker:latest
+    image: mayankag96/springboot-docker:16
     ports:
       - 8080:8080
     depends_on:
