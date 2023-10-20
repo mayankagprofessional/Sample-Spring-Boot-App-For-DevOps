@@ -55,6 +55,7 @@ jobs:
 
           echo $STACK_EXISTS
           echo "Repo URL : ${{ github.repository.html_url }}"
+          echo "Trial Repo URL: ${{github.server_url}}/${{github.actor}}/${{github.repository}}"
 
           if [ -z "$STACK_EXISTS" ]; then
             curl -k -X POST "${{secrets.PORTAINER_URL}}/api/stacks/create/standalone/repository?endpointId=2" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" -H "Content-Type: application/json" -d '{
@@ -70,7 +71,7 @@ jobs:
               "repositoryUsername": "${{ github.actor }}",
               "repositoryPassword": "${{secrets.GITREPO_PASSWORD}}",
               "repositoryReferenceName": "${{ github.ref }}",
-              "repositoryURL": "${{ github.repository.html_url }}",
+              "repositoryURL": "${{github.server_url}}/${{github.actor}}/${{github.repository}}",
               "tlsskipVerify": false
             }'
           else
