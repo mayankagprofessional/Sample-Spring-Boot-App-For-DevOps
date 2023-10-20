@@ -43,9 +43,6 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:$GITHUB_RUN_NUMBER
   
-      # - name: Deploy Portainer Stack
-      #   run: |
-      #     curl -X POST -H "Authorization: Bearer ${{ secrets.PORTAINER_API_TOKEN }}" -H "Content-Type: application/json" -d "@/path/to/docker-compose.yml" http://${{ secrets.PORTAINER_URL }}/api/stacks?type=1
-        # env:
-        #   PORTAINER_API_TOKEN: ${{ secrets.PORTAINER_API_TOKEN }}
-        #   PORTAINER_URL: ${{ secrets.PORTAINER_URL }}
+      - name: Deploy Portainer Stack
+        run: |
+        curl -X GET -H "X-API-Key: ${{ secrets.PORTAINER_API_TOKEN }}" "Content-Type: application/json" -d "@/docker-compose.yml" https://${{ secrets.PORTAINER_URL }}:9443/api/stacks -k
