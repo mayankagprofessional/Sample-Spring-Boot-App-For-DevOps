@@ -4,7 +4,7 @@ services:
   app:
     image: mayankag96/springboot-docker:latest
     ports:
-      - "8080:8080"
+      - 8080:8080
     depends_on:
       - db
 
