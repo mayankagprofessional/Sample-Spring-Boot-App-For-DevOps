@@ -51,7 +51,7 @@ jobs:
   
       - name: Check and Deploy Portainer Stack
         run: |
-          STACK_EXISTS=$(curl -k -s -X GET "https://${{secrets.PORTAINER_URL}}:9443/api/stacks" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" | jq '.[] | select(.Name == "${{secrets.STACK_NAME}}")')
+          STACK_EXISTS=$(curl -k -s -X GET "https://portainer.homelab.mayankag.info:9443/api/stacks" -H "X-API-Key: ptr_Pqs0N6+AQynCW5BoOXMMLU54ZPy72OF+t4ZJAgPqJyo=" | jq '.[] | select(.Name == "npm")')
           
           echo "Mayank"
           echo "STACK_EXISTS: $STACK_EXISTS"
