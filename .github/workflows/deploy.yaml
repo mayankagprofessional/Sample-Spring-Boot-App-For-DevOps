@@ -54,7 +54,6 @@ jobs:
           STACK_EXISTS=$(curl -k -s -X GET "${{secrets.PORTAINER_URL}}/api/stacks" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" | jq '.[] | select(.Name == "${{secrets.STACK_NAME}}")')
 
           echo $STACK_EXISTS
-          echo "Repo URL : ${{ github.repository.html_url }}"
           echo "Trial Repo URL: ${{github.server_url}}/${{github.repository}}"
 
           if [ -z "$STACK_EXISTS" ]; then
@@ -74,6 +73,8 @@ jobs:
               "repositoryURL": "${{github.server_url}}/${{github.repository}}",
               "tlsskipVerify": false
             }')
+
+            echo $STACK_EXISTS
 
             if [ -z "$STACK_CREATED" ]; then
               echo "Stack not created"
