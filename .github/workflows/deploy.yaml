@@ -48,5 +48,7 @@ jobs:
           # Fetch Docker Compose file from GitHub
           DOCKER_COMPOSE_CONTENT=$(curl -sL "https://raw.githubusercontent.com/mayankagprofessional/Sample-Spring-Boot-App-For-DevOps/main/docker-compose.yaml")
 
+          echo ${DOCKER_COMPOSE_CONTENT}
 
-          curl -X POST -H "X-API-Key: ${{ secrets.PORTAINER_API_TOKEN }}" "Content-Type: application/json" -d "Name=Spring" -d "StackFileContent=${DOCKER_COMPOSE_CONTENT}" https://${{ secrets.PORTAINER_URL }}:9443/api/stacks -k
+
+          curl -X POST -H "X-API-Key: ${{ secrets.PORTAINER_API_TOKEN }}" "Content-Type: application/json" -d "Name=Spring" -d "StackFileContent=${DOCKER_COMPOSE_CONTENT}" https://portainer.homelab.mayankag.info:9443/api/stacks -k
