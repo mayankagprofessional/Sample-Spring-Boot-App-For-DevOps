@@ -45,4 +45,8 @@ jobs:
   
       - name: Deploy Portainer Stack
         run: |
-          curl -X POST -H "X-API-Key: ${{ secrets.PORTAINER_API_TOKEN }}" "Content-Type: application/json" -d "Name=Spring" -d "@docker-compose.yml" https://${{ secrets.PORTAINER_URL }}:9443/api/stacks -k
+          # Fetch Docker Compose file from GitHub
+          DOCKER_COMPOSE_CONTENT=$(curl -sL "https://raw.githubusercontent.com/mayankagprofessional/Sample-Spring-Boot-App-For-DevOps/main/docker-compose.yaml")
+
+
+          curl -X POST -H "X-API-Key: ${{ secrets.PORTAINER_API_TOKEN }}" "Content-Type: application/json" -d "Name=Spring" -d "StackFileContent=${DOCKER_COMPOSE_CONTENT}" https://${{ secrets.PORTAINER_URL }}:9443/api/stacks -k
