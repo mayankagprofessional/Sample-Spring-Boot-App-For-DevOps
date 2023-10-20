@@ -66,7 +66,7 @@ jobs:
               "repositoryAuthentication": true,
               "repositoryUsername": "${{ github.actor }}",
               "repositoryPassword": "${{secrets.GITREPO_PASSWORD}}",
-              "repositoryReferenceName": "mskm",
+              "repositoryReferenceName": "${{github.ref}}",
               "repositoryURL": "${{github.server_url}}/${{github.repository}}",
               "tlsskipVerify": false
             }')
