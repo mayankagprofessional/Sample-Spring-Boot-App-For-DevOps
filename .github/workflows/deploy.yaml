@@ -46,8 +46,8 @@ jobs:
       #   run: |
       #     docker push ${{secrets.DOCKER_USERNAME }}/$IMAGE_NAME:$GITHUB_RUN_NUMBER
 
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
+      # - name: Install jq
+      #   run: sudo apt-get update && sudo apt-get install -y jq
   
       - name: Check and Deploy Portainer Stack
         run: |
@@ -55,8 +55,10 @@ jobs:
           
           echo "Mayank"
           echo "STACK_EXISTS: $STACK_EXISTS"
-          echo "${{secrets.PORTAINER_URL}}"
+          echo "$MY_ENV_VAR"
 
           if [ -z "$STACK_EXISTS" ]; then
             echo "API response is empty."
           fi
+        env:
+          MY_ENV_VAR: ${{ secrets.PORTAINER_URL }}
