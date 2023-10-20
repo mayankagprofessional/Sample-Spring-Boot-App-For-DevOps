@@ -71,7 +71,7 @@ jobs:
               "repositoryUsername": "${{ github.actor }}",
               "repositoryPassword": "${{secrets.GITREPO_PASSWORD}}",
               "repositoryReferenceName": "${{ github.ref }}",
-              "repositoryURL": "${{github.server_url}}/${{github.actor}}/${{github.repository}}",
+              "repositoryURL": "${{github.server_url}}/${{github.repository}}",
               "tlsskipVerify": false
             }'
           else
