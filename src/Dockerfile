@@ -10,5 +10,6 @@ COPY target/samplejavaproject-1.0.jar /app/samplejavaproject.jar
 # Expose 8080 port
 EXPOSE 8080
 
+
 # Run the JAR file when the container launches
 CMD ["java", "-jar", "samplejavaproject.jar"]
