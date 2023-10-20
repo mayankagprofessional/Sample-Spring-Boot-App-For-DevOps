@@ -55,7 +55,7 @@ jobs:
           
           echo "Mayank"
           echo "STACK_EXISTS: $STACK_EXISTS"
-          echo "$MY_ENV_VAR"
+          echo "Env value : $MY_ENV_VAR"
 
           if [ -z "$STACK_EXISTS" ]; then
             echo "API response is empty."
