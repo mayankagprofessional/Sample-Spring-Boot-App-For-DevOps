@@ -51,9 +51,16 @@ jobs:
   
       - name: Check and Deploy Portainer Stack
         run: |
+          ## Check whether stack already exists in Portainer or not
+
           STACK_EXISTS=$(curl -k -s -X GET "${{secrets.PORTAINER_URL}}/api/stacks" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" | jq '.[] | select(.Name == "${{secrets.PORTAINER_STACK_NAME}}")')
 
+          ## If the stack does not exists then create the stack otherwise just show the message
+
           if [ -z "$STACK_EXISTS" ]; then
+
+            ## Create stack
+
             STACK_CREATED=$(curl -k -X POST "${{secrets.PORTAINER_URL}}/api/stacks/create/standalone/repository?endpointId=${{secrets.PORTAINER_ENDPOINT_ID}}" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" -H "Content-Type: application/json" -d '{
               "additionalFiles": [],
               "autoUpdate": {
@@ -70,6 +77,8 @@ jobs:
               "repositoryURL": "${{github.server_url}}/${{github.repository}}",
               "tlsskipVerify": false
             }')
+
+            ## Check whether the new stack is created or not. If fails then show the reason otherwise exit successfully
 
             if [[ "$STACK_CREATED" == *"fail"* ]]; then
               echo "Stack not created"
