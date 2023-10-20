@@ -71,7 +71,9 @@ jobs:
               "tlsskipVerify": false
             }')
 
+            echo "Mayank1"
             echo $STACK_CREATED
+            echo "Mayank2"
 
             if [ -z "$STACK_CREATED" ]; then
               echo "Stack not created"
