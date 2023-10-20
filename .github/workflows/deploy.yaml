@@ -54,7 +54,7 @@ jobs:
           STACK_EXISTS=$(curl -k -s -X GET "https://${{secrets.PORTAINER_URL}}:9443/api/stacks" -H "X-API-Key: {{secrets.PORTAINER_API_TOKEN}}" | jq '.[] | select(.Name == "${{secrets.STACK_NAME}}")' | jq length)
           
           echo "Mayank"
-          echo $STACK_EXISTS 
+          echo "$STACK_EXISTS"
 
           if [ "$STACK_EXISTS" -eq 0 ]; then
             echo "Stack exists"
