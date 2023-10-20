@@ -62,7 +62,7 @@ jobs:
               "composeFile": "docker-compose.yml",
               "env": [],
               "fromAppTemplate": false,
-              "name": "${{secrets.STACK_NAME}}::102",
+              "name": "${{secrets.STACK_NAME}}:{}102",
               "repositoryAuthentication": true,
               "repositoryUsername": "${{ github.actor }}",
               "repositoryPassword": "${{secrets.GITREPO_PASSWORD}}",
