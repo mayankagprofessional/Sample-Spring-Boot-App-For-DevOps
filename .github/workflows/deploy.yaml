@@ -54,7 +54,7 @@ jobs:
           STACK_EXISTS=$(curl -k -s -X GET "${{secrets.PORTAINER_URL}}/api/stacks" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" | jq '.[] | select(.Name == "${{secrets.STACK_NAME}}")')
 
           echo $STACK_EXISTS
-          echo " User is : ${{ github.repository.owner.login }}""
+          echo " User is : ${{ github.repository.owner.login }}"
 
           # if [ -z "$STACK_EXISTS" ]; then
           #   curl -k -X POST "${{secrets.PORTAINER_URL}}/api/stacks/create/standalone/repository?endpointId=2" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" -H "Content-Type: application/json" -d '{
@@ -67,7 +67,7 @@ jobs:
           #     "fromAppTemplate": false,
           #     "name": "${{secrets.STACK_NAME}}",
           #     "repositoryAuthentication": true,
-          #     "repositoryUsername": "github.repository.owner.login",
+          #     "repositoryUsername": "${{github.repository.owner.login}}",
           #     "repositoryPassword": "${{secrets.GITREPO_PASSWORD}}",
           #     "repositoryReferenceName": "${{ github.ref }}",
           #     "repositoryURL": "${{ github.repository.html_url }}",
