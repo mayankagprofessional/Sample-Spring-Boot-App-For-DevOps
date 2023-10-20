@@ -25,6 +25,9 @@ jobs:
           cache: maven
           check-latest: true
 
+      - name: Install Maven
+        run: sudo apt-get update && sudo apt install -y maven
+
       - name: Clean Install with Maven
         run: mvn clean install
 
@@ -48,7 +51,7 @@ jobs:
   
       - name: Check and Deploy Portainer Stack
         run: |
-          STACK_EXISTS=$(curl -k -s -X GET "https://${{secrets.PORTAINER_URL}}:9443/api/stacks" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" | jq '.[] | select(.Name == "${{secrets.STACK_NAME}}") | jq length')
+          STACK_EXISTS=$(curl -k -s -X GET "https://${{secrets.PORTAINER_URL}}:9443/api/stacks" -H "X-API-Key: {{secrets.PORTAINER_API_TOKEN}}" | jq '.[] | select(.Name == "${{secrets.STACK_NAME}}")' | jq length)
           
           echo "Mayank"
           echo $STACK_EXISTS 
