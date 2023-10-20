@@ -48,15 +48,35 @@ jobs:
 
       # - name: Install jq
       #   run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Fetch GitHub Username
+        id: username
+        run: echo "::set-output name=username::${{ github.repository.owner.login }}"
   
       - name: Check and Deploy Portainer Stack
         run: |
-          STACK_EXISTS=$(curl -k -s -X GET "https://${{secrets.PORTAINER_URL}}:9443/api/stacks" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" | jq '.[] | select(.Name == "${{secrets.STACK_NAME}}")')
+          STACK_EXISTS=$(curl -k -s -X GET "${{secrets.PORTAINER_URL}}/api/stacks" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" | jq '.[] | select(.Name == "${{secrets.STACK_NAME}}")')
 
           echo $STACK_EXISTS
+          echo ${{ github.repository.owner.login }}
 
           if [ -z "$STACK_EXISTS" ]; then
-            echo "API response is empty."
+            curl -k -X POST "${{secrets.PORTAINER_URL}}/api/stacks/create/standalone/repository?endpointId=2" -H "X-API-Key: ${{secrets.PORTAINER_API_TOKEN}}" -H "Content-Type: application/json" -d '{
+              "additionalFiles": [],
+              "autoUpdate": {
+                "interval": "5m"
+              },
+              "composeFile": "docker-compose.yml",
+              "env": [],
+              "fromAppTemplate": false,
+              "name": "${{secrets.STACK_NAME}}",
+              "repositoryAuthentication": true,
+              "repositoryUsername": "${{ steps.username.outputs.username }}",
+              "repositoryPassword": "${{secrets.GITREPO_PASSWORD}}",
+              "repositoryReferenceName": "${{ github.ref }}",
+              "repositoryURL": "${{ github.repository.html_url }}",
+              "tlsskipVerify": false
+            }'
           else
-            echo "API response is not empty"
+            echo "Stacks Exists"
           fi
