@@ -75,13 +75,15 @@ jobs:
             echo $STACK_CREATED
             echo "Mayank2"
 
-            if [ -z "$STACK_CREATED" ]; then
+            if [[ "$STACK_CREATED" == *"fail"* ]]; then
               echo "Stack not created"
+              exit 0
             else
               echo "Stack created successfully"
+              exit 1
             fi
 
 
           else
-            echo "Stacks Exists"
+            echo "Stacks Already Exists"
           fi
