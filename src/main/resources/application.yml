@@ -1,0 +1,43 @@
+springdoc:
+  swagger-ui:
+    path: /
+  show-actuator: true
+
+
+application:
+  jwt:
+    claim-user-email: userEmail
+    claim-user-scopes: scope
+    token-expiration-after-days: 3
+    token-prefix: Bearer
+    secret-key: sample_secret_key_sample_secret_key_sample_secret_key_sample_secret_key
+
+spring:
+  main:
+    banner-mode: "off"
+  h2:
+    console:
+      enabled: true
+      settings:
+        trace: false
+        web-allow-others: false
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:file:~/devdb
+    username: username
+    password: password
+    driverClassName: org.h2.Driver
+#  mvc:
+#    servlet:
+#      path: /
+
+
+#server:
+#  error:
+#    whitelabel:
+#      enabled: false

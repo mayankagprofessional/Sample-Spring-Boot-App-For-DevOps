@@ -1,10 +1,10 @@
-package info.mayankag.samplejavaproject;
+package info.mayankag.springscale;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SamplejavaprojectApplicationTests {
+class SpringScaleApplicationTests {
 
 	@Test
 	void contextLoads() {
